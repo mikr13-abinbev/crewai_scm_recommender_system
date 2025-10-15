@@ -8,10 +8,6 @@ os.environ['CREWAI_DISABLE_TELEMETRY'] = 'true'
 class ResearchFlow(Flow):
 
     @start()
-    def initial_method(self):
-        pass 
-    
-    @listen(initial_method)
     def start_method_of_research_flow(self):
         """
         Run the supply chain intelligence crew.
