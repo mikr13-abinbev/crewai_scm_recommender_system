@@ -1,7 +1,74 @@
-write_poem:
+extract_and_analyze:
   description: >
-    Write a poem about how CrewAI is awesome.
-    Ensure the poem is engaging and adheres to the specified sentence count of {sentence_count}.
+    Extract all SKU data from the supply chain database including:
+    - Product details (SKU, Product_type, Price)
+    - Sales metrics (Number_of_products_sold, Revenue_generated)
+    - Inventory levels (Stock_levels, Availability)
+    - Supply chain data (Lead_times, Order_quantities, Shipping_times)
+    - Quality metrics (Defect_rates, Inspection_results)
+
+    Perform initial analysis to identify:
+    - Top revenue generating SKUs
+    - SKUs with low stock levels
+    - SKUs with high lead times
+    - Products with quality issues
   expected_output: >
-    A beautifully crafted poem about CrewAI, with exactly {sentence_count} sentences.
-  agent: poem_writer
+    A comprehensive dataset with all SKU information organized by priority,
+    including flagged items that need immediate attention.
+  agent: data_analyst
+
+calculate_priorities:
+  description: >
+    Using the extracted data, calculate for each SKU:
+    1. Inventory turnover ratio
+    2. Reorder point based on lead time and demand
+    3. Safety stock levels
+    4. Priority score based on revenue, turnover, stock status, and lead time risk
+
+    Categorize SKUs into:
+    - CRITICAL: Immediate action required (score > 70)
+    - HIGH: Action needed soon (score 50-70)
+    - MEDIUM: Monitor closely (score 30-50)
+    - LOW: Maintain current levels (score < 30)
+  expected_output: >
+    A prioritized list of all SKUs with calculated metrics and priority scores,
+    clearly categorized by urgency level.
+  agent: inventory_strategist
+  context:
+    - extract_and_analyze
+
+generate_recommendations:
+  description: >
+    Create a comprehensive executive report with:
+
+    1. CRITICAL PRIORITY SKUs (Top 10)
+       - Current stock vs. recommended levels
+       - Specific action: Increase/Decrease/Maintain/Discontinue
+       - Recommended order quantity
+       - Business rationale and financial impact
+
+    2. INVENTORY OPTIMIZATION INSIGHTS
+       - Overstocked items (holding cost risk)
+       - Understocked items (stockout risk)
+       - Slow-moving inventory recommendations
+
+    3. SUPPLY CHAIN RISKS
+       - Long lead time products requiring buffer stock
+       - High defect rate products needing supplier review
+       - Seasonal considerations
+
+    4. FINANCIAL IMPACT SUMMARY
+       - Estimated cost savings from optimization
+       - Revenue protection from stockout prevention
+       - Working capital recommendations
+
+    Format: Executive summary + detailed SKU-level recommendations
+  expected_output: >
+    A well-structured markdown report with clear sections, data-driven
+    recommendations, and specific action items for each priority SKU.
+  agent: business_advisor
+  context:
+    - extract_and_analyze
+    - calculate_priorities
+  markdown: true
+  output_file: supply_chain_recommendations.md
