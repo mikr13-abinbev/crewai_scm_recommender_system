@@ -11,7 +11,7 @@ class DatabaseQueryInput(BaseModel):
         ...,
         description=(
             "SQL query to execute against the supply chain database. "
-            "The database contains SKU data with columns: SKU, Product_type, Price, "
+            "The database contains SKU data table with name: `supply_chain_dataset` with columns: SKU, Product_type, Price, "
             "Availability, Number_of_products_sold, Revenue_generated, Customer_demographics, "
             "Stock_levels, Lead_times, Order_quantities, Shipping_times, Shipping_carriers, "
             "Shipping_costs, Supplier_name, Location, Lead_time, Production_volumes, "
@@ -25,7 +25,7 @@ class DatabaseQueryTool(BaseTool):
     name: str = "Database Query Tool"
     description: str = (
         "Query the supply chain SQLite database for SKU and product data. "
-        "Use this tool to retrieve product information, inventory levels, sales data, "
+        "Use this tool to retrieve from table supply_chain_dataset product information, inventory levels, sales data, "
         "supplier information, shipping details, and manufacturing metrics. "
         "Returns results as JSON-formatted string with column names and row data."
     )
