@@ -5,15 +5,15 @@ from pydantic import BaseModel
 
 from crewai.flow import Flow, listen, start
 
-from crewai_scm_recommender_system.crews.poem_crew.poem_crew import PoemCrew
+from crewai_scm_recommender_system.crews.recommender_crew.recommender_crew import RecommenderCrew
 
 
-class PoemState(BaseModel):
+class RecommenderState(BaseModel):
     sentence_count: int = 1
-    poem: str = ""
+    recommender: str = ""
 
 
-class PoemFlow(Flow[PoemState]):
+class RecommenderFlow(Flow[RecommenderState]):
 
     @start()
     def generate_sentence_count(self):
@@ -21,32 +21,32 @@ class PoemFlow(Flow[PoemState]):
         self.state.sentence_count = randint(1, 5)
 
     @listen(generate_sentence_count)
-    def generate_poem(self):
-        print("Generating poem")
+    def generate_recommender(self):
+        print("Generating recommender")
         result = (
-            PoemCrew()
+            RecommenderCrew()
             .crew()
             .kickoff(inputs={"sentence_count": self.state.sentence_count})
         )
 
-        print("Poem generated", result.raw)
-        self.state.poem = result.raw
+        print("Recommender generated", result.raw)
+        self.state.recommender = result.raw
 
-    @listen(generate_poem)
-    def save_poem(self):
-        print("Saving poem")
-        with open("poem.txt", "w") as f:
-            f.write(self.state.poem)
+    @listen(generate_recommender)
+    def save_recommender(self):
+        print("Saving recommender")
+        with open("recommender.txt", "w") as f:
+            f.write(self.state.recommender)
 
 
 def kickoff():
-    poem_flow = PoemFlow()
-    poem_flow.kickoff()
+    recommender_flow = RecommenderFlow()
+    recommender_flow.kickoff()
 
 
 def plot():
-    poem_flow = PoemFlow()
-    poem_flow.plot()
+    recommender_flow = RecommenderFlow()
+    recommender_flow.plot()
 
 
 if __name__ == "__main__":
