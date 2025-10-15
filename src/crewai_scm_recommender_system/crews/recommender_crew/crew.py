@@ -1,3 +1,4 @@
+import os
 from crewai_scm_recommender_system.tools.database_query_tool import DatabaseQueryTool
 from crewai_scm_recommender_system.tools.metric_calculator_tool import InventoryMetricsTool
 from crewai_scm_recommender_system.tools.priority_tool import PriorityScoringTool
@@ -20,7 +21,8 @@ class SupplyChainCrew:
             config=self.agents_config['data_analyst'],  # type: ignore[index]
             tools=[DatabaseQueryTool()],
             verbose=True,
-            allow_delegation=False
+            allow_delegation=False,
+            max_retry_limit=1,
         )
     
     @agent
@@ -29,7 +31,8 @@ class SupplyChainCrew:
             config=self.agents_config['inventory_strategist'],  # type: ignore[index]
             tools=[InventoryMetricsTool(), PriorityScoringTool()],
             verbose=True,
-            allow_delegation=False
+            allow_delegation=False,
+            max_retry_limit=1,
         )
     
     @agent
@@ -37,14 +40,15 @@ class SupplyChainCrew:
         return Agent(
             config=self.agents_config['business_advisor'],  # type: ignore[index]
             verbose=True,
-            allow_delegation=False
+            allow_delegation=False,
+            max_retry_limit=1,
         )
 
     @task
     def extract_and_analyze(self) -> Task:
         return Task(
             config=self.tasks_config['extract_and_analyze'],  # type: ignore[index]
-            agent=self.data_analyst()
+            agent=self.data_analyst(),
         )
     
     @task
@@ -68,6 +72,5 @@ class SupplyChainCrew:
             tasks=self.tasks,
             process=Process.sequential,
             verbose=True,
-            memory=True,
             output_log_file='crew_execution.log'
         )

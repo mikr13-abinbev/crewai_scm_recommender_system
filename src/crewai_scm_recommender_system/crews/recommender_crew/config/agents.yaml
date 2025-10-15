@@ -2,7 +2,7 @@ data_analyst:
   role: >
     Supply Chain Data Analyst
   goal: >
-    Extract and analyze SKU performance metrics from the supply chain database
+    Extract and analyze SKU performance metrics from the supply chain database. The table name is `supply_chain_dataset`. The table supply_chain_dataset contains the following columns: Product_type (string), SKU (string), Price (float), Availability (integer), Number_of_products_sold (integer), Revenue_generated (float), Customer_demographics (string), Stock_levels (integer), Lead_times (integer), Order_quantities (integer), Shipping_times (integer), Shipping_carriers (string), Shipping_costs (float), Supplier_name (string), Location (string), Lead_time (integer), Production_volumes (integer), Manufacturing_lead_time (integer), Manufacturing_costs (float), Inspection_results (string), Defect_rates (float), Transportation_modes (string), Routes (string), and Costs (float).
   backstory: >
     You are an experienced data analyst with 10+ years in supply chain analytics.
     You excel at querying databases, identifying patterns in inventory data,
@@ -13,7 +13,7 @@ inventory_strategist:
   role: >
     Inventory Optimization Strategist
   goal: >
-    Determine optimal stock levels and prioritize SKUs based on business impact
+    Determine optimal stock levels and prioritize SKUs based on business impact. The table name is `supply_chain_dataset`. The table supply_chain_dataset contains the following columns: Product_type (string), SKU (string), Price (float), Availability (integer), Number_of_products_sold (integer), Revenue_generated (float), Customer_demographics (string), Stock_levels (integer), Lead_times (integer), Order_quantities (integer), Shipping_times (integer), Shipping_carriers (string), Shipping_costs (float), Supplier_name (string), Location (string), Lead_time (integer), Production_volumes (integer), Manufacturing_lead_time (integer), Manufacturing_costs (float), Inspection_results (string), Defect_rates (float), Transportation_modes (string), Routes (string), and Costs (float).
   backstory: >
     You are a supply chain strategist specialized in inventory optimization.
     With deep expertise in reorder point calculations, safety stock management,
@@ -24,7 +24,7 @@ business_advisor:
   role: >
     Business Intelligence Advisor
   goal: >
-    Generate actionable recommendations with clear business rationale
+    Generate actionable recommendations with clear business rationale. The table name is `supply_chain_dataset`. The table supply_chain_dataset contains the following columns: Product_type (string), SKU (string), Price (float), Availability (integer), Number_of_products_sold (integer), Revenue_generated (float), Customer_demographics (string), Stock_levels (integer), Lead_times (integer), Order_quantities (integer), Shipping_times (integer), Shipping_carriers (string), Shipping_costs (float), Supplier_name (string), Location (string), Lead_time (integer), Production_volumes (integer), Manufacturing_lead_time (integer), Manufacturing_costs (float), Inspection_results (string), Defect_rates (float), Transportation_modes (string), Routes (string), and Costs (float).
   backstory: >
     You are a senior business advisor who translates complex analytics into
     clear, actionable recommendations for executives. You understand the

@@ -1,26 +1,27 @@
 #!/usr/bin/env python
 import os
-from crewai.flow import Flow, start
-from pydantic import BaseModel
+from crewai.flow import Flow, start, listen
 from crewai_scm_recommender_system.crews.recommender_crew.crew import SupplyChainCrew
 
 os.environ['CREWAI_DISABLE_TELEMETRY'] = 'true'
 
-class ResearchFlowState(BaseModel):
-    inputs: dict = {
-        'current_date': '2025-10-15',
-        'analysis_period': 'Last 90 days'
-    }
+class ResearchFlow(Flow):
 
-class ResearchFlow(Flow[ResearchFlowState]):
-    @start
-    def run(self):
+    @start()
+    def initial_method(self):
+        pass 
+    
+    @listen(initial_method)
+    def start_method_of_research_flow(self):
         """
         Run the supply chain intelligence crew.
         """
-        
+        print("Code started...")
         crew_instance = SupplyChainCrew()
-        result = crew_instance.crew().kickoff(inputs=self.state.inputs)
+        result = crew_instance.crew().kickoff(inputs={
+            'current_date': '2025-10-15',
+            'analysis_period': 'Last 90 days'
+        })
 
         print("\n" + "="*50)
         print("CREW EXECUTION COMPLETED")
@@ -29,7 +30,7 @@ class ResearchFlow(Flow[ResearchFlowState]):
         print(f"\nReport saved to: supply_chain_recommendations.md")
         print(f"\nToken Usage: {result.token_usage}")
         
-        return result
+        return result.raw
 
 def kickoff():
     research_flow = ResearchFlow()
