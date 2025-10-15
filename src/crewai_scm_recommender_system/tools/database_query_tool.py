@@ -36,7 +36,6 @@ class DatabaseQueryTool(BaseTool):
         import os
         base_dir = os.path.dirname(os.path.abspath(__file__))
         db_path = os.path.abspath(os.path.join(base_dir, '../../../data/supply_chain_dataset.sqlite'))
-        print(f"Database path: {db_path}")
         conn = sqlite3.connect(db_path)
         try:
             cursor = conn.cursor()

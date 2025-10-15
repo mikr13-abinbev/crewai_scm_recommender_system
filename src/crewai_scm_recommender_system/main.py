@@ -16,12 +16,8 @@ class ResearchFlow(Flow):
         """
         Run the supply chain intelligence crew.
         """
-        print("Code started...")
         crew_instance = SupplyChainCrew()
-        result = crew_instance.crew().kickoff(inputs={
-            'current_date': '2025-10-15',
-            'analysis_period': 'Last 90 days'
-        })
+        result = crew_instance.crew().kickoff(inputs={})
 
         print("\n" + "="*50)
         print("CREW EXECUTION COMPLETED")

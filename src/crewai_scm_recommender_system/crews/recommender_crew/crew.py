@@ -2,7 +2,7 @@ import os
 from crewai_scm_recommender_system.tools.database_query_tool import DatabaseQueryTool
 from crewai_scm_recommender_system.tools.metric_calculator_tool import InventoryMetricsTool
 from crewai_scm_recommender_system.tools.priority_tool import PriorityScoringTool
-from crewai import LLM, Agent, Crew, Process, Task
+from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
